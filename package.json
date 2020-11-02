@@ -4,10 +4,10 @@
   "description": "A npm-link helper CLI for npm package develop with Main Project ",
   "author": "21epub",
   "license": "MIT",
-  "homepage": "21epub/npm-link-peerdeps",
+  "homepage": "https://github.com/21epub/npm-link-peerdeps",
   "repository": {
     "type": "git",
-    "url": "git+21epub/npm-link-peerdeps.git"
+    "url": "git+https://github.com/21epub/npm-link-peerdeps.git"
   },
   "bin": {
     "npm-link-peerdeps": "./dist/index.js"
@@ -28,7 +28,7 @@
   "scripts": {
     "clean": "rm dist/bundle.js",
     "test": "jest --coverage",
-    "lint": "run-s lint:js lint:style lint:prettier",
+    "lint": "run-s lint:js lint:prettier",
     "lint-staged:js": "eslint --fix --cache --ext .ts,.tsx ./src",
     "lint:js": "eslint --fix --cache --ext .ts,.tsx ./src",
     "lint:prettier": "prettier --check --write \"**/*\" --end-of-line auto",

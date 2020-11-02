@@ -5,7 +5,6 @@ import queryInfo, { QueryInfo } from './queryInfo'
 import pEachSeries from 'p-each-series'
 
 const packageJson = require(`${process.cwd()}/package.json`)
-const start = process.argv.includes('start')
 const stop = process.argv.includes('stop')
 
 const linkNpm = async (info: QueryInfo): Promise<void> => {
@@ -22,7 +21,7 @@ const linkNpm = async (info: QueryInfo): Promise<void> => {
   await execCommands({
     commands: [
       {
-        cwd: info.project_cwd,
+        cwd: info.projectCwd,
         cmd: 'npm',
         args: ['link', info.name]
       }
@@ -36,7 +35,7 @@ const unLinkNpm = async (info: QueryInfo): Promise<void> => {
   await execCommands({
     commands: [
       {
-        cwd: info.project_cwd,
+        cwd: info.projectCwd,
         cmd: 'npm',
         args: ['unlink', info.name]
       }
@@ -56,7 +55,7 @@ const unLinkNpm = async (info: QueryInfo): Promise<void> => {
   await execCommands({
     commands: [
       {
-        cwd: info.project_cwd,
+        cwd: info.projectCwd,
         cmd: 'npm',
         args: ['install']
       }
@@ -71,13 +70,13 @@ const linkPeers = async (
   info: QueryInfo
 ) => {
   const peers = Object.keys(peerDependencies)
-  if (peers.length && info.project_cwd?.length) {
-    const project_path = info.project_cwd.endsWith('/')
-      ? info.project_cwd
-      : info.project_cwd + '/'
+  if (peers.length && info.projectCwd?.length) {
+    const projectPath = info.projectCwd.endsWith('/')
+      ? info.projectCwd
+      : info.projectCwd + '/'
 
     await pEachSeries(peers, async (peer) => {
-      const peerLinkPath = project_path + 'node_modules/' + peer
+      const peerLinkPath = projectPath + 'node_modules/' + peer
       return execCommands({
         commands: [
           {
@@ -97,7 +96,7 @@ const unLinkPeers = async (
   info: QueryInfo
 ) => {
   const peers = Object.keys(peerDependencies)
-  if (peers.length && info.project_cwd?.length) {
+  if (peers.length && info.projectCwd?.length) {
     await execCommands({
       commands: [
         {
@@ -115,9 +114,10 @@ const startBundleWatch = async (info: QueryInfo) => {
   if (info?.start) {
     const text = ora('Completed ! Then it will start your bundle watch! ')
     text.succeed()
-    execa('npm', ['run', info.start], {
+    const { stdout } = execa('npm', ['run', info.start], {
       cwd: info.cwd
-    }).stdout?.pipe(process.stdout)
+    })
+    stdout?.pipe(process.stdout)
   }
 }
 

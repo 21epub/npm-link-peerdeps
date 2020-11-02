@@ -5,7 +5,7 @@ const packageJson = require(`${process.cwd()}/package.json`)
 export interface QueryInfo {
   name: string
   cwd: string
-  project_cwd: string
+  projectCwd: string
   start?: string
 }
 
@@ -13,10 +13,10 @@ export default async (): Promise<QueryInfo> => {
   const info = await inquirer.prompt([
     {
       type: 'input',
-      name: 'project_cwd',
+      name: 'projectCwd',
       message: 'Input the Path(cwd) of Main Project (e.g. /var/project ): ',
-      validate: (project_cwd: string) => {
-        return project_cwd?.length > 0
+      validate: (projectCwd: string) => {
+        return projectCwd?.length > 0
       }
     },
     {
