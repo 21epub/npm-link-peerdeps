@@ -117,7 +117,7 @@ const startBundleWatch = async (info: QueryInfo) => {
     const { stdout } = execa('npm', ['run', info.start], {
       cwd: info.cwd
     })
-    stdout?.pipe(process.stdout)
+    if (stdout) stdout.pipe(process.stdout)
   }
 }
 
