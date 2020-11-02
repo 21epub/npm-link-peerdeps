@@ -1,79 +1,47 @@
-# @21epub/link-peerdeps
+# @21epub/npm-link-peerdeps
 
-> A npm-link helper for npm package develop with Main Project 
+> A npm-link helper for npm package develop with Main Project
 
-[![NPM](https://img.shields.io/npm/v/@21epub/link-peerdeps.svg)](https://www.npmjs.com/package/@21epub/link-peerdeps) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) ![Build Status](https://img.shields.io/travis/com/21epub/link-peerdeps) ![Codecov](https://img.shields.io/codecov/c/github/21epub/link-peerdeps)
+[![NPM](https://img.shields.io/npm/v/@21epub/npm-link-peerdeps.svg)](https://www.npmjs.com/package/@21epub/npm-link-peerdeps) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) ![Build Status](https://img.shields.io/travis/com/21epub/npm-link-peerdeps) ![Codecov](https://img.shields.io/codecov/c/github/21epub/npm-link-peerdeps)
 
 ## Intro
 
-This is a component for react. 
+Start your npm library created by [create-parcel-react-library](https://www.npmjs.com/package/@21epub/create-parcel-react-library)
+
+Link your npm package to Main Project to test in Project ENV.
+
+Auto-run npm-link for both Library and Project.
+
+Link peers to the Main Project
 
 ## Feature
 
 - [x] Easy-to-use
-- [x] Typescript Support
-
-## Install
-
-```bash
-npm install --save @21epub/link-peerdeps
-```
 
 ## Usage
 
+#### Use npx directly
+
+To start npm-link your library :
+
 ```tsx
-import React, { Component } from 'react'
+npx @21epub/npm-link-peerdeps start # start npm-link for project dev
 
-import MyComponent from '@21epub/link-peerdeps'
-import '@21epub/link-peerdeps/dist/index.css'
-
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
-}
 ```
 
-For Details: See Example
+To stop npm-link and return back to your library local dev :
 
-
-## Developing and running on localhost
-
-First install dependencies and then install peerDeps for parcel dev:
-
-```sh
-npm install
-npm run install-peers
+```tsx
+npx @21epub/npm-link-peerdeps stop # stop npm-link for project dev
 ```
 
-To run Example in hot module reloading mode:
+#### Or install and run as global
 
-```sh
-npm start
-```
-
-To create a parcel production build:
-
-```sh
-npm run build-prod
-```
-
-To create a bundle library module build:
-
-```sh
-npm run build
-```
-
-## Running
-
-Open the file `dist/index.html` in your browser
-
-## Testing
-
-To run unit tests:
-
-```sh
-npm test
+```bash
+npm install -g @21epub/npm-link-peerdeps
+npm-link-peerdeps start
+...
+npm-link-peerdeps stop
 ```
 
 ## License
