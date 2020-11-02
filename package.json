@@ -38,7 +38,7 @@
     "release": "git fetch --tags && npx standard-version",
     "release:alpha": "npm run release -- --prerelease alpha",
     "commit": "lint-staged && npx git-cz",
-    "prepublishOnly": "run-s lint test build"
+    "prepublishOnly": "run-s lint build"
   },
   "lint-staged": {
     "**/*.{ts}": "npm run lint-staged:js",

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import execa from 'execa'
 import ora from 'ora'
 import { execCommands } from './exec'
