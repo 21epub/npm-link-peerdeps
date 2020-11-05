@@ -24,14 +24,14 @@ Link peers to the Main Project
 
 To start npm-link your library :
 
-```tsx
+```bash
 npx @21epub/npm-link-peerdeps start # start npm-link for project dev
 
 ```
 
 To stop npm-link and return back to your library local dev :
 
-```tsx
+```bash
 npx @21epub/npm-link-peerdeps stop # stop npm-link for project dev
 ```
 
