@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.0.7](https://github.com/21epub/npm-link-peerdeps/compare/v0.0.6...v0.0.7) (2020-11-15)
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
 ## [0.0.6](https://github.com/21epub/npm-link-peerdeps/compare/v0.0.5...v0.0.6) (2020-11-15)
 
 ### Bug Fixes
