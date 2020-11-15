@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.0.6](https://github.com/21epub/npm-link-peerdeps/compare/v0.0.5...v0.0.6) (2020-11-15)
+
+### Bug Fixes
+
+- fix link peers failed for react ([ab77d30](https://github.com/21epub/npm-link-peerdeps/commit/ab77d30))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
 ## [0.0.5](https://github.com/21epub/npm-link-peerdeps/compare/v0.0.4...v0.0.5) (2020-11-05)
 
 # Change Log

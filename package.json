@@ -1,6 +1,6 @@
 {
   "name": "@21epub/npm-link-peerdeps",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A npm-link helper CLI for npm package develop with Main Project ",
   "author": "21epub",
   "license": "MIT",
