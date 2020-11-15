@@ -77,19 +77,29 @@ const linkPeers = async (
       ? info.projectCwd
       : info.projectCwd + '/'
 
-    await pEachSeries(peers, async (peer) => {
+    for (let peer of peers) {
       const peerLinkPath = projectPath + 'node_modules/' + peer
-      return execCommands({
+      await execCommands({
         commands: [
           {
             cwd: info.cwd,
             cmd: 'npm',
-            args: ['install', peerLinkPath]
+            args: ['link', peerLinkPath]
           }
         ],
-        info: 'Install peer from Main Project: ' + peerLinkPath
+        info: 'Link peer from Main Project: ' + peerLinkPath
       })
-    })
+      await execCommands({
+        commands: [
+          {
+            cwd: info.cwd,
+            cmd: 'npm',
+            args: ['link', peer]
+          }
+        ],
+        info: 'link peer to Library: ' + peer
+      })
+    }
   }
 }
 
@@ -98,6 +108,35 @@ const unLinkPeers = async (
   info: QueryInfo
 ) => {
   const peers = Object.keys(peerDependencies)
+  if (peers.length && info.projectCwd?.length) {
+    const projectPath = info.projectCwd.endsWith('/')
+      ? info.projectCwd
+      : info.projectCwd + '/'
+
+    for (let peer of peers) {
+      const peerLinkPath = projectPath + 'node_modules/' + peer
+      await execCommands({
+        commands: [
+          {
+            cwd: info.cwd,
+            cmd: 'npm',
+            args: ['unlink', peerLinkPath]
+          }
+        ],
+        info: 'unlink peer from Main Project: ' + peerLinkPath
+      })
+      await execCommands({
+        commands: [
+          {
+            cwd: info.cwd,
+            cmd: 'npm',
+            args: ['unlink', peer]
+          }
+        ],
+        info: 'unlink peer to Library: ' + peer
+      })
+    }
+  }
   if (peers.length && info.projectCwd?.length) {
     await execCommands({
       commands: [
