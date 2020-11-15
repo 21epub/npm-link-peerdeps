@@ -4,7 +4,6 @@ import execa from 'execa'
 import ora from 'ora'
 import { execCommands } from './exec'
 import queryInfo, { QueryInfo } from './queryInfo'
-import pEachSeries from 'p-each-series'
 
 const packageJson = require(`${process.cwd()}/package.json`)
 const stop = process.argv.includes('stop')
@@ -77,7 +76,7 @@ const linkPeers = async (
       ? info.projectCwd
       : info.projectCwd + '/'
 
-    for (let peer of peers) {
+    for (const peer of peers) {
       const peerLinkPath = projectPath + 'node_modules/' + peer
       await execCommands({
         commands: [
@@ -113,7 +112,7 @@ const unLinkPeers = async (
       ? info.projectCwd
       : info.projectCwd + '/'
 
-    for (let peer of peers) {
+    for (const peer of peers) {
       const peerLinkPath = projectPath + 'node_modules/' + peer
       await execCommands({
         commands: [
