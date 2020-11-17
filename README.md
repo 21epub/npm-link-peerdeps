@@ -32,8 +32,9 @@ npx @21epub/npm-link-peerdeps start # start npm-link for project dev
 After answer prompts , It will do something below:
 
 - Npm link current library in library cwd
-- Npm link library in Main project cwd
-- Npm link peerDependencies from main project cwd ( To make this done , ensure that your main project has installed these peer packages )
+- Rm peers from node_modules
+- Install library to Main Project & Link it to Main project
+- Watch & re bundle library code
 
 To stop npm-link and return back to your library local dev :
 

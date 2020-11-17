@@ -9,6 +9,8 @@ const packageJson = require(`${process.cwd()}/package.json`)
 const stop = process.argv.includes('stop')
 
 const linkNpm = async (info: QueryInfo): Promise<void> => {
+  // remove peers from library
+  await linkPeers(packageJson.peerDependencies, info)
   await execCommands({
     commands: [
       {
@@ -24,12 +26,21 @@ const linkNpm = async (info: QueryInfo): Promise<void> => {
       {
         cwd: info.projectCwd,
         cmd: 'npm',
+        args: ['install', info.cwd, '--no-save']
+      }
+    ],
+    info: 'Install library to Main Project folder'
+  })
+  await execCommands({
+    commands: [
+      {
+        cwd: info.projectCwd,
+        cmd: 'npm',
         args: ['link', info.name]
       }
     ],
     info: 'Link library in Main Project folder'
   })
-  await linkPeers(packageJson.peerDependencies, info)
 }
 
 const unLinkNpm = async (info: QueryInfo): Promise<void> => {
@@ -77,26 +88,15 @@ const linkPeers = async (
       : info.projectCwd + '/'
 
     for (const peer of peers) {
-      const peerLinkPath = projectPath + 'node_modules/' + peer
       await execCommands({
         commands: [
           {
             cwd: info.cwd,
-            cmd: 'npm',
-            args: ['link', peerLinkPath]
+            cmd: 'rm',
+            args: ['-fr', './node_modules/' + peer]
           }
         ],
-        info: 'Link peer from Main Project: ' + peerLinkPath
-      })
-      await execCommands({
-        commands: [
-          {
-            cwd: info.cwd,
-            cmd: 'npm',
-            args: ['link', peer]
-          }
-        ],
-        info: 'link peer to Library: ' + peer
+        info: 'Rm peer from Library packages: ' + peer
       })
     }
   }
@@ -107,35 +107,6 @@ const unLinkPeers = async (
   info: QueryInfo
 ) => {
   const peers = Object.keys(peerDependencies)
-  if (peers.length && info.projectCwd?.length) {
-    const projectPath = info.projectCwd.endsWith('/')
-      ? info.projectCwd
-      : info.projectCwd + '/'
-
-    for (const peer of peers) {
-      const peerLinkPath = projectPath + 'node_modules/' + peer
-      await execCommands({
-        commands: [
-          {
-            cwd: info.cwd,
-            cmd: 'npm',
-            args: ['unlink', peerLinkPath]
-          }
-        ],
-        info: 'unlink peer from Main Project: ' + peerLinkPath
-      })
-      await execCommands({
-        commands: [
-          {
-            cwd: info.cwd,
-            cmd: 'npm',
-            args: ['unlink', peer]
-          }
-        ],
-        info: 'unlink peer to Library: ' + peer
-      })
-    }
-  }
   if (peers.length && info.projectCwd?.length) {
     await execCommands({
       commands: [
