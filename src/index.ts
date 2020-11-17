@@ -83,10 +83,6 @@ const linkPeers = async (
 ) => {
   const peers = Object.keys(peerDependencies)
   if (peers.length && info.projectCwd?.length) {
-    const projectPath = info.projectCwd.endsWith('/')
-      ? info.projectCwd
-      : info.projectCwd + '/'
-
     for (const peer of peers) {
       await execCommands({
         commands: [
